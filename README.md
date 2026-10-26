@@ -12,7 +12,8 @@ embedded chat for WhatsApp messages and voice calls. An administrator connects t
 
 ## Branches
 
-One branch per Odoo version, as the Odoo Apps Store requires: `19.0`, `18.0`. The module is the same on both.
+One branch per Odoo version, as the Odoo Apps Store requires: `19.0`, `18.0`, `17.0` (see Release for the small
+per-branch differences).
 
 ## Layout
 
@@ -32,15 +33,17 @@ spoki_whatsapp/
 ./scripts/build.sh
 ```
 
-Writes `out/spoki_whatsapp-<version>.zip`, importable from **Apps > Import Module** (developer mode) and uploaded to the
-public S3 bucket used by the download button in Spoki.
+Writes `out/spoki_whatsapp-<version>.zip`, importable from **Apps > Import Module** (developer mode). Customers get the same
+zip from the **Download** button on the Odoo Apps Store page.
 
 ## Release
 
 1. Bump `version` in `__manifest__.py`. Keep it short (`1.0.1`): Odoo Online rejects a version prefixed with another series.
-2. Merge into `19.0` and `18.0`; the Odoo Apps Store rescans the branches.
-3. Run `./scripts/build.sh`, upload the zip to `media/integrations/odoo/<version>/spoki_whatsapp.zip` and bump
-   `SPOKI_ODOO_VERSION` / `SPOKI_ODOO_INSTALL_URL` in spoki-fe `OdooIntegrationDetails.tsx`.
+2. Port the change to `19.0`, `18.0` and `17.0`. Keep the per-branch differences: `groups_id` instead of `group_ids` in
+   `data/server_actions.xml` on 18.0 and 17.0, and `jsonrpc as rpc` from `@web/core/network/rpc_service` on 17.0.
+3. Click **Scan** on the repository at apps.odoo.com/apps/dashboard/repos (daily scan is off), then bump
+   `SPOKI_ODOO_VERSION` / `SPOKI_ODOO_RELEASE_DATE` in spoki-fe `OdooIntegrationDetails.tsx`. The install button links to
+   the store listing, so there is no zip to upload.
 
 ## Gotchas
 
