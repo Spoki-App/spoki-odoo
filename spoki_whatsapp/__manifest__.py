@@ -33,7 +33,7 @@ connects it once from Settings > Spoki > Connect to Spoki.
             "spoki_whatsapp/static/src/spoki_chat_button/spoki_connect.xml",
         ],
     },
-    "images": ["static/description/contact_button_screenshot.png", "static/description/settings_connect.png"],
+    "images": ["static/description/spoki_odoo_result_screenshot.jpg"],
     "application": False,
     "installable": True,
     "auto_install": False,
