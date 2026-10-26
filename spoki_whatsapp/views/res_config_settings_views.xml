@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form_spoki_whatsapp" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.spoki.whatsapp</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app data-string="Spoki" string="Spoki" name="spoki_whatsapp" logo="/spoki_whatsapp/static/description/icon.png">
+                    <block title="WhatsApp Chat &amp; Voice" name="spoki_connection_block">
+                        <setting id="spoki_connect_setting" string="Spoki account"
+                                 help="Connect once, then use the Open Spoki Chat button on any contact.">
+                            <widget name="spoki_connect"/>
+                        </setting>
+                    </block>
+                </app>
+            </xpath>
+        </field>
+    </record>
+</odoo>

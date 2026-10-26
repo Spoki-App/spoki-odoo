@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="spoki_whatsapp.SpokiChatButton">
+        <div class="spoki_chat_widget">
+            <t t-if="this.state.chatLink">
+                <div class="spoki_chat_toolbar d-flex justify-content-between align-items-center mb-2">
+                    <button type="button" class="btn btn-link p-0 spoki_chat_popup_link" t-on-click="this.openPopup"
+                            aria-label="Open the Spoki chat in a separate window">
+                        WhatsApp By Spoki ↗
+                    </button>
+                    <button type="button" class="btn btn-secondary btn-sm spoki_chat_close" t-on-click="this.closeChat"
+                            aria-label="Close the Spoki chat">
+                        Close
+                    </button>
+                </div>
+                <iframe class="spoki_chat_frame"
+                        t-att-src="this.state.chatLink"
+                        t-attf-style="width: 100%; height: {{ this.state.height }}px; border: 0;"
+                        allow="microphone; camera; autoplay"
+                        sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"/>
+            </t>
+            <t t-else="">
+                <button type="button" class="btn spoki-chat-button" t-on-click="this.openChat" t-att-disabled="this.state.isOpening">
+                    <i class="fa fa-whatsapp me-1" role="img" aria-label="Spoki"/>
+                    <span t-out="this.state.isOpening ? 'Opening…' : 'Open Spoki Chat'"/>
+                </button>
+            </t>
+        </div>
+    </t>
+</templates>

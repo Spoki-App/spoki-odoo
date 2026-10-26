@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_spoki_get_config" model="ir.actions.server">
+        <field name="name">Spoki: chat configuration</field>
+        <field name="model_id" ref="base.model_res_partner"/>
+        <field name="state">code</field>
+        <field name="group_ids" eval="[(6, 0, [ref('base.group_user')])]"/>
+        <field name="code">icp = env['ir.config_parameter'].sudo()
+action = {
+    'type': 'ir.actions.act_window_close',
+    'params': {
+        'database_uuid': icp.get_param('database.uuid') or '',
+        'base_url': (icp.get_param('spoki.base_url') or 'https://api.spoki.com').rstrip('/'),
+        'app_url': (icp.get_param('spoki.app_url') or 'https://app.spoki.com').rstrip('/'),
+        'signing_key': icp.get_param('spoki.signing_key') or '',
+        'user_email': env.user.email or '',
+    },
+}
+</field>
+    </record>
+
+    <record id="action_spoki_save_connection" model="ir.actions.server">
+        <field name="name">Spoki: save connection</field>
+        <field name="model_id" ref="base.model_res_partner"/>
+        <field name="state">code</field>
+        <field name="group_ids" eval="[(6, 0, [ref('base.group_system')])]"/>
+        <field name="code">key = (env.context.get('spoki_signing_key') or '').strip().lower()
+base_url = (env.context.get('spoki_base_url') or '').strip().rstrip('/')
+if key and (len(key) != 64 or not set(key) &lt;= set('0123456789abcdef')):
+    raise UserError('Spoki sent an invalid signing key. Please try connecting again.')
+local_prefixes = ('http://localhost:', 'http://127.0.0.1:')
+if base_url and not (base_url.startswith('https://') or base_url.startswith(local_prefixes)):
+    raise UserError('Spoki sent an invalid address. Please try connecting again.')
+icp = env['ir.config_parameter'].sudo()
+icp.set_param('spoki.signing_key', key or False)
+if key and base_url:
+    icp.set_param('spoki.base_url', base_url)
+action = {'type': 'ir.actions.act_window_close', 'params': {'connected': bool(key)}}
+</field>
+    </record>
+</odoo>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="spoki_whatsapp.SpokiConnect">
+        <div class="spoki_connect_widget">
+            <t t-if="this.state.loading">
+                <span class="text-muted">Loading…</span>
+            </t>
+            <t t-elif="this.state.connected">
+                <div class="text-success mb-2">
+                    <i class="fa fa-check-circle me-1" role="img" aria-label="Connected"/>
+                    <span>Connected to Spoki</span>
+                </div>
+                <button type="button" class="btn btn-secondary me-2" t-on-click="this.connect" t-att-disabled="this.state.connecting">
+                    <span t-out="this.state.connecting ? 'Waiting for Spoki…' : 'Reconnect'"/>
+                </button>
+                <button type="button" class="btn btn-link" t-on-click="this.disconnect">Disconnect</button>
+            </t>
+            <t t-else="">
+                <div class="text-muted mb-2">Connect your Spoki account to send WhatsApp messages and make calls from your contacts.</div>
+                <button type="button" class="btn btn-primary" t-on-click="this.connect" t-att-disabled="this.state.connecting">
+                    <span t-out="this.state.connecting ? 'Waiting for Spoki…' : 'Connect to Spoki'"/>
+                </button>
+            </t>
+        </div>
+    </t>
+</templates>

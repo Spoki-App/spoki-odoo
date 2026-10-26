@@ -1,0 +1,19 @@
+.spoki-chat-button.btn {
+    background-color: #25d366;
+    border-color: #25d366;
+    color: #fff;
+}
+
+.spoki-chat-button.btn:hover,
+.spoki-chat-button.btn:focus,
+.spoki-chat-button.btn:active {
+    background-color: #1ebe5d;
+    border-color: #1ebe5d;
+    color: #fff;
+}
+
+.spoki-chat-button.btn:disabled {
+    background-color: #8fe0ac;
+    border-color: #8fe0ac;
+    color: #fff;
+}
