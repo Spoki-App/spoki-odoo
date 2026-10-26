@@ -1,6 +1,6 @@
 /** @odoo-module **/
 
-import { rpc } from "@web/core/network/rpc";
+import { jsonrpc as rpc } from "@web/core/network/rpc_service";
 
 const CONFIG_ACTION_XMLID = "spoki_whatsapp.action_spoki_get_config";
 const SAVE_ACTION_XMLID = "spoki_whatsapp.action_spoki_save_connection";
